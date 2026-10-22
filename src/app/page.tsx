@@ -1,135 +1,27 @@
-import { Check, Star } from 'lucide-react'
-import Image from 'next/image'
-import MaxWidthWrapper from '../components/MaxWidthWrapper'
-import Phone from '@/components/Phone'
-
-export default function Home() {
-	return (
-		<>
-			<div className='bg-slate-50'>
-				<section>
-					<MaxWidthWrapper className='pb-24 pt-10 lg:flex lg-grid-cols-3 sm:pb-32 lg:gap-x-0 xl:gap-x-8 lg:pt-24 xl:pt-32 lg:pb-52'>
-						<div className='col-span-2 px-6 lg:px-0 lg:pt-4'>
-							<div className='relative mx-auto text-center lg:text-left flex flex-col items-center lg:items-start'>
-								<div className='absolute w-28 left-0 -top-20 hidden lg:block'>
-									<Image
-										src='/img/phone.png'
-										alt='Case Shop - Logo'
-										className='w-full'
-										height={320}
-										width={320}
-									/>
-								</div>
-								<h1 className='relative w-fit tracking-tight text-balance mt-16 font-bold !leading-tight text-grey-900 text-5xl md:text-6xl lg:text-7xl'>
-									Your Image on a{' '}
-									<span className='bg-blue-600 px-2 text-white'>Custom</span>{' '}
-									Phone Case
-								</h1>
-								<p className='mt-8 text-lg lg:pr-10 maw-w-prose text-center lg:text-left text-balance md:text-wrap'>
-									Capture your favorite memories with your own,{' '}
-									<span className='font-semibold'>one-of-one</span> phone case.
-									Case-Shop allows you to protect your memories, not just your
-									phone!
-								</p>
-								<ul className='mt-8 space-y-2 text-left font-medium flex flex-col items-center sm:items-start'>
-									<div className='space-y-2'>
-										<li className='flex gap-1 5 tiems-center text-left'>
-											<Check className='h-5 w-5 shrink-0 text-blue-600' />
-											High-quality, durable material
-										</li>
-										<li className='flex gap-1 5 tiems-center text-left'>
-											<Check className='h-5 w-5 shrink-0 text-blue-600' />5 year
-											print guarantee
-										</li>
-										<li className='flex gap-1 5 tiems-center text-left'>
-											<Check className='h-5 w-5 shrink-0 text-blue-600' />
-											Modern iPhone models supported
-										</li>
-									</div>
-								</ul>
-								<div className='mt-12 flex flex-col sm:flex-row items-center sm:items-start gap-5'>
-									<div className='flex -space-x-4'>
-										<Image
-											src='/img/users/user-1.jpg'
-											alt='User One'
-											height={225}
-											width={225}
-											className='inline-block object-cover h-10 w-10 rounded-full ring-2 ring-slate-300 ring-offset-2'
-										/>
-										<Image
-											src='/img/users/user-2.jpg'
-											alt='User Two'
-											height={450}
-											width={450}
-											className='inline-block object-cover h-10 w-10 rounded-full ring-2 ring-slate-300 ring-offset-2'
-										/>
-										<Image
-											src='/img/users/user-3.jpg'
-											alt='User Three'
-											height={917}
-											width={1280}
-											className='inline-block object-cover h-10 w-10 rounded-full ring-2 ring-slate-300 ring-offset-2'
-										/>
-										<Image
-											src='/img/users/user-4.jpg'
-											alt='User Four'
-											height={750}
-											width={750}
-											className='inline-block object-cover h-10 w-10 rounded-full ring-2 ring-slate-300 ring-offset-2'
-										/>
-										<Image
-											src='/img/users/user-5.jpg'
-											alt='User Five'
-											height={1044}
-											width={1080}
-											className='inline-block object-cover h-10 w-10 rounded-full ring-2 ring-slate-300 ring-offset-2'
-										/>
-									</div>
-									<div className='flex flex-col justify-between items-center sm:items-start'>
-										<div className='flex gap-0 5'>
-											<Star className='h-4 w-4 text-blue-600 fill-blue-600' />
-											<Star className='h-4 w-4 text-blue-600 fill-blue-600' />
-											<Star className='h-4 w-4 text-blue-600 fill-blue-600' />
-											<Star className='h-4 w-4 text-blue-600 fill-blue-600' />
-											<Star className='h-4 w-4 text-blue-600 fill-blue-600' />
-										</div>
-										<p>
-											<span className='font-semibold'>1,250</span> happy
-											customers
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div className='col-span-1 w-full flex justify-center px-8 sm:px-16 md:px-0 mt-32 lg:mx-0 lg:mt-20 h-fit'>
-							<div className='relative md:max-w-xl'>
-								<Image
-									className='absolute w-40 lg:w-52 left-56 -top-20 select-none hidden sm:block lg:hidden xl:block'
-									src='/img/your-image.png'
-									alt='image'
-									height={428}
-									width={619}
-								/>
-								<Image
-									src='/img/line.png'
-									className='absolute w-20 -left-6 -bottom-6 select-none'
-									alt='image'
-									height={608}
-									width={339}
-								/>
-								<Image
-									alt='image'
-									src='/img/iphone.png'
-									className='absolute w-40 lg:w-52 left-56 -top-20 select-none hidden sm:block lg:hidden xl:block'
-									height={1831}
-									width={896}
-								/>
-								<Phone className='w-64' imgSrc='/img/testimonials/1.jpg' />
-							</div>
-						</div>
-					</MaxWidthWrapper>
-				</section>
-			</div>
-		</>
-	)
+'use client';
+import Link from 'next/link';
+import {useEffect,useRef,useState} from 'react';
+import {ArrowUpRight,Download,ImagePlus,RotateCcw,Sun,Moon} from 'lucide-react';
+const palettes=['#b7a0ff','#f7a379','#b5db7c','#7fcdd9','#f3e9d8','#292939'];
+export default function Home(){
+ const canvas=useRef<HTMLCanvasElement>(null),scene=useRef<HTMLDivElement>(null);
+ const [dark,setDark]=useState(true),[model,setModel]=useState('iPhone 16'),[color,setColor]=useState(palettes[0]),[pattern,setPattern]=useState('Flow'),[text,setText]=useState('MAKE\nWAVES.'),[ink,setInk]=useState('#171521'),[image,setImage]=useState<HTMLImageElement|null>(null),[zoom,setZoom]=useState(1),[x,setX]=useState(0),[y,setY]=useState(0),[rotation,setRotation]=useState(0),[message,setMessage]=useState(''),[filename,setFilename]=useState('');
+ useEffect(()=>{setDark(document.documentElement.dataset.theme!=='light');const reduced=matchMedia('(prefers-reduced-motion: reduce)');let frame=0;const move=()=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(()=>{if(scene.current)scene.current.style.setProperty('--drift',reduced.matches?'0px':Math.min(24,window.scrollY*.035)+'px')})};window.addEventListener('scroll',move,{passive:true});return()=>{window.removeEventListener('scroll',move);cancelAnimationFrame(frame)}},[]);
+ useEffect(()=>{const c=canvas.current;if(!c)return;const ctx=c.getContext('2d');if(!ctx)return;const w=600,h=model==='iPhone 16 Pro Max'?1240:model==='Galaxy S24'?1280:1200;c.width=w;c.height=h;ctx.clearRect(0,0,w,h);ctx.save();ctx.beginPath();ctx.roundRect(8,8,w-16,h-16,model==='Galaxy S24'?45:100);ctx.clip();ctx.fillStyle=color;ctx.fillRect(0,0,w,h);
+ if(image){const fit=Math.max(w/image.width,h/image.height)*zoom;ctx.save();ctx.translate(w/2+x*3,h/2+y*5);ctx.rotate(rotation*Math.PI/180);ctx.drawImage(image,-image.width*fit/2,-image.height*fit/2,image.width*fit,image.height*fit);ctx.restore()}
+ else if(pattern==='Flow'){for(let i=0;i<6;i++){ctx.strokeStyle=i%2?'#ff704f':'#592ed0';ctx.lineWidth=90;ctx.beginPath();ctx.moveTo(-80+i*150,h+100);ctx.bezierCurveTo(600+i*90,650,-250+i*80,700,100+i*100,-150);ctx.stroke()}}
+ else if(pattern==='Orbit'){for(let i=5;i>0;i--){ctx.fillStyle=i%2?'#171521':color;ctx.beginPath();ctx.arc(430,720,i*105,0,Math.PI*2);ctx.fill()}}
+ else if(pattern==='Check'){for(let row=0;row<14;row++)for(let col=0;col<7;col++)if((row+col)%2===0){ctx.fillStyle='#171521';ctx.fillRect(col*100,row*100,100,100)}}
+ ctx.fillStyle=ink;ctx.textAlign='center';ctx.font='900 82px Arial';text.split('\n').slice(0,3).forEach((line,i)=>ctx.fillText(line.slice(0,16),w/2,h*.68+i*90,w-70));ctx.restore();ctx.strokeStyle='#ffffff50';ctx.lineWidth=12;ctx.beginPath();ctx.roundRect(8,8,w-16,h-16,model==='Galaxy S24'?45:100);ctx.stroke();ctx.fillStyle='#18181d';ctx.beginPath();ctx.roundRect(42,45,model==='Galaxy S24'?90:220,245,45);ctx.fill();const lenses=model==='Galaxy S24'?[[87,90],[87,165],[87,240]]:[[105,110],[200,170],[105,230]];for(const [lx,ly] of lenses){ctx.fillStyle='#32313e';ctx.beginPath();ctx.arc(lx,ly,35,0,Math.PI*2);ctx.fill();ctx.fillStyle='#090a11';ctx.beginPath();ctx.arc(lx,ly,24,0,Math.PI*2);ctx.fill();ctx.fillStyle='#5c698e';ctx.beginPath();ctx.arc(lx-7,ly-7,7,0,Math.PI*2);ctx.fill()}
+ },[model,color,pattern,text,ink,image,zoom,x,y,rotation]);
+ function theme(){const next=!dark;setDark(next);document.documentElement.dataset.theme=next?'dark':'light';try{localStorage.setItem('case.theme',next?'dark':'light')}catch{}}
+ function upload(file?:File){if(!file)return;if(!['image/jpeg','image/png','image/webp'].includes(file.type)||file.size>10*1024*1024){setMessage('Choose a JPG, PNG or WebP image under 10 MB.');return}const url=URL.createObjectURL(file),img=new Image();img.onload=()=>{setImage(img);setFilename(file.name);setZoom(1);setX(0);setY(0);setRotation(0);setMessage('Image ready. Adjust the crop below.');URL.revokeObjectURL(url)};img.onerror=()=>{setMessage('This image could not be opened. Try another file.');URL.revokeObjectURL(url)};img.src=url}
+ function download(){canvas.current?.toBlob(blob=>{if(!blob){setMessage('Download failed. Please try again.');return}const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='case-shop-'+model.toLowerCase().replaceAll(' ','-')+'.png';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);setMessage('Your case preview is downloaded.')},'image/png')}
+ function reset(){setImage(null);setFilename('');setText('MAKE\nWAVES.');setColor(palettes[0]);setInk('#171521');setPattern('Flow');setZoom(1);setX(0);setY(0);setRotation(0);setMessage('Design reset.')}
+ return <><header className="flex items-center justify-between gap-4 border-b px-5 py-5 md:px-12"><Link href="/" className="text-xl font-black tracking-tight">case<span className="accent">/</span>shop</Link><span className="hidden text-xs uppercase tracking-[.2em] sm:block">Small object. Big personality.</span><button onClick={theme} aria-label={dark?'Switch to light theme':'Switch to dark theme'} className="icon-button">{dark?<Sun size={18}/>:<Moon size={18}/>}</button></header>
+ <main className="mx-auto max-w-[1400px] px-5 md:px-12"><section className="hero grid items-center gap-12 py-14 lg:grid-cols-[1.1fr_1fr]"><div><p className="eyebrow">THE POCKET-SIZED CREATIVE STUDIO</p><h1 className="mt-6 text-6xl font-black leading-[.95] tracking-[-.06em] md:text-8xl">Not just<br/>a case.<br/><span className="accent">Your canvas.</span></h1><p className="mt-7 max-w-md text-base leading-7 muted">Your favourite photo. A colour that hits. A few words that feel like you. Turn the everyday into something entirely your own.</p><a href="#studio" className="primary mt-8 inline-flex items-center gap-5">Make it yours <ArrowUpRight size={20}/></a><p className="mt-5 text-xs muted">Design freely. Download your preview. Keep creating.</p></div><div ref={scene} className="preview-scene"><div className="orbit"/><div className="phone-wrap"><canvas ref={canvas} aria-label="Live custom phone case preview" role="img"/></div><span className="preview-tag">ONE OF ONE / DESIGNED BY YOU</span><span className="preview-corner">LIVE PREVIEW ↗</span></div></section>
+ <section id="studio" className="studio mb-12 scroll-mt-6 rounded-3xl border p-5 md:p-9"><div className="flex flex-wrap items-center justify-between gap-4"><div><p className="eyebrow">01 / THE STUDIO</p><h2 className="mt-3 text-3xl font-bold tracking-tight">A little more you.</h2></div><button className="secondary flex items-center gap-2" onClick={reset}><RotateCcw size={15}/> Reset</button></div><div className="mt-8 grid gap-8 lg:grid-cols-3"><div className="space-y-5"><label className="control-label">Phone model<select value={model} onChange={e=>setModel(e.target.value)}>{['iPhone 16','iPhone 16 Pro Max','Galaxy S24'].map(m=><option key={m}>{m}</option>)}</select></label><div><p className="control-label">Start with a pattern</p><div className="mt-3 grid grid-cols-4 gap-2">{['Flow','Orbit','Check','Solid'].map(p=><button key={p} aria-pressed={!image&&pattern===p} className={`pattern ${p.toLowerCase()} ${!image&&pattern===p?'active':''}`} onClick={()=>{setImage(null);setFilename('');setPattern(p)}}><span>{p}</span></button>)}</div></div><label className="upload"><ImagePlus size={24}/><span>Or upload your image</span><small>JPG, PNG or WebP · Up to 10 MB</small><input aria-label="Upload your image" type="file" accept="image/jpeg,image/png,image/webp" onChange={e=>{upload(e.target.files?.[0]);e.target.value=''}}/></label>{filename&&<p className="text-xs break-all muted">{filename}</p>}</div>
+ <div className="space-y-5"><div><p className="control-label">Base colour</p><div className="mt-3 flex flex-wrap gap-3">{palettes.map(c=><button key={c} style={{background:c}} className={`swatch ${color===c?'active':''}`} aria-label={'Base colour '+c} aria-pressed={color===c} onClick={()=>setColor(c)}/>)}</div></div><label className="control-label">Your words<textarea maxLength={48} rows={3} value={text} onChange={e=>setText(e.target.value)} placeholder="Make a statement"/></label><label className="control-label flex items-center justify-between">Text colour<input type="color" value={ink} onChange={e=>setInk(e.target.value)}/></label><p className="text-xs muted">Up to 3 lines, 16 characters per line.</p></div>
+ <div className="space-y-5"><p className="control-label">Fine-tune your image</p>{([{name:'Zoom',value:zoom,set:setZoom,min:1,max:3,step:.05},{name:'Horizontal position',value:x,set:setX,min:-100,max:100,step:1},{name:'Vertical position',value:y,set:setY,min:-100,max:100,step:1},{name:'Rotation',value:rotation,set:setRotation,min:-180,max:180,step:1}]).map(c=><label className="range-label" key={c.name}><span>{c.name}<output>{c.value}</output></span><input aria-label={c.name} type="range" disabled={!image} min={c.min} max={c.max} step={c.step} value={c.value} onChange={e=>c.set(Number(e.target.value))}/></label>)}{!image&&<p className="text-xs muted">Upload a photo to unlock crop controls.</p>}<button className="primary flex w-full items-center justify-center gap-3" onClick={download}><Download size={18}/> Download design</button></div></div><p role="status" className="mt-5 text-sm accent">{message}</p><p className="mt-5 text-xs muted">Concept preview only. Model proportions and camera cutouts are illustrative; this is not a manufacturer print template or a purchase.</p></section>
+ <footer className="flex flex-wrap justify-between gap-4 border-t py-8 text-xs muted"><span>case/shop — Made to be personal.</span><span>Your uploaded image stays in your browser.</span></footer></main></>
 }
